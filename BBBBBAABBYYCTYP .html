@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Surprise for Baby ❤️</title>
+<style>
+* { margin:0; padding:0; box-sizing:border-box; font-family: 'Comic Sans MS', cursive, sans-serif; }
+body, html { height:100%; overflow:hidden; background:#fce4ec; }
+.slide { display:flex; flex-direction:column; justify-content:center; align-items:center; height:100vh; width:100vw; text-align:center; color:#fff; position:absolute; top:0; left:0; transition: opacity 1s ease; }
+.hidden { display:none; }
+.heart-icon { font-size:3em; cursor:pointer; margin-top:30px; animation: pulse 1s infinite alternate; }
+@keyframes pulse { 0% { transform: scale(1); } 100% { transform: scale(1.2); } }
+h1 { font-size:4em; font-weight:bold; text-shadow:2px 2px 15px #ff69b4; margin-bottom:20px; color:#ff1493; }
+h2 { font-size:2em; color:#fff0f5; margin-bottom:20px; }
+p { font-size:1.5em; max-width:700px; line-height:1.6; padding:20px; border-radius:15px; text-shadow:1px 1px 5px #00000050; }
+.emoji { position:absolute; font-size:2em; pointer-events:none; animation: float 6s linear infinite; }
+@keyframes float { 0% { transform: translateY(0); opacity:1; } 100% { transform: translateY(-1000px); opacity:0; } }
+
+#slide1 { background: linear-gradient(135deg, #fbc2eb, #a6c1ee); }
+#slide2 { background: linear-gradient(135deg, #fad0c4, #ffd1ff); }
+#slide3 { background: linear-gradient(135deg, #a1c4fd, #c2e9fb); }
+#slide4 { background: linear-gradient(135deg, #fccb90, #d57eeb); }
+#slide5 { background: linear-gradient(135deg, #fddb92, #d1fdff); overflow:hidden; position:relative; }
+
+#gameArea { position:relative; width:80%; height:60%; border:2px dashed #fff; margin-top:20px; overflow:hidden; border-radius:15px; background:rgba(255,255,255,0.1); }
+.fallingEmoji { position:absolute; font-size:2em; cursor:pointer; }
+.cornerDecor { position:absolute; font-size:1.5em; opacity:0.7; }
+#finalText { font-size:3em; font-weight:bold; text-align:center; max-width:80%; line-height:1.4; color:#ff1493; text-shadow:2px 2px 15px #ff69b4; }
+#finalSubText { font-size:2em; font-weight:bold; margin-top:20px; color:#ff69b4; text-shadow:2px 2px 15px #ffb6c1; }
+#sparkHeart { font-size:3em; cursor:pointer; animation: pulse 1s infinite alternate; position:absolute; bottom:50px; }
+</style>
+</head>
+<body>
+
+<!-- Slide 1 -->
+<div class="slide" id="slide1">
+  <h1>Happy Boyfriend's Day, My Heart</h1>
+  <h2>I love you, baby</h2>
+  <div class="heart-icon" onclick="nextSlide()">❤️ Click Here</div>
+</div>
+
+<!-- Slide 2 -->
+<div class="slide hidden" id="slide2">
+  <div class="heart-icon" onclick="showParagraph()">❤️ Click Here</div>
+  <p id="para" class="hidden" style="background:rgba(255,182,193,0.6); color:#000;">
+    My dearest baby, you make every day magical 💖. Your smile lights up my world ✨.  
+    Every moment with you is a treasure 🌸. Your laugh is my favorite melody 🎵.  
+    I adore the way you care for me 💌. Even small messages from you brighten my day 💖.  
+    You are my sunshine, my warmth, my everything 🌞❤️. I can’t wait for all our adventures together ✨.  
+    You make my heart skip and my soul dance 💃. Every heartbeat whispers your name 💖.  
+    I love dreaming about us together 🌸. You are my forever and always ❤️.  
+    Being with you feels like a fairy tale ✨💌. I’m endlessly grateful for you 💖.
+  </p>
+  <div class="heart-icon hidden" id="nextHeart2" onclick="nextSlide()">❤️ Click Here</div>
+</div>
+
+<!-- Slide 3 -->
+<div class="slide hidden" id="slide3">
+  <div class="heart-icon" onclick="showVisual()">❤️ Click Here</div>
+  <div id="visualContainer" class="hidden">
+    <div style="font-size:3em;">💖✨🌸💌❤️✨💖🌸</div>
+    <p style="margin-top:20px; font-size:1.5em; background:rgba(255,182,193,0.5); padding:15px; border-radius:15px;">
+      Every heartbeat reminds me of you ❤️. Imagining our dreams together makes me smile 💖✨.  
+      Your love is the spark that lights up my world 🌸💌. Little phone, train and moon emojis represent our sweet story 🚂📱🌙.
+    </p>
+  </div>
+  <div class="heart-icon hidden" id="nextHeart3" onclick="nextSlide()">❤️ Click Here</div>
+</div>
+
+<!-- Slide 4: Game -->
+<div class="slide hidden" id="slide4">
+  <h2>Catch All Hearts & Emojis ❤️💖✨</h2>
+  <div id="gameArea"></div>
+  <div id="finalHeart" onclick="nextSlide()" style="display:none;">❤️ Click Here</div>
+</div>
+
+<!-- Slide 5: Final Slide -->
+<div class="slide hidden" id="slide5">
+  <div id="finalText"></div>
+  <div id="finalSubText"></div>
+  <div id="sparkHeart" onclick="spawnExtraHearts()">❤️</div>
+</div>
+
+<script>
+// Slide navigation
+let currentSlide = 1;
+function nextSlide(){
+  document.getElementById(`slide${currentSlide}`).classList.add('hidden');
+  currentSlide++;
+  document.getElementById(`slide${currentSlide}`).classList.remove('hidden');
+  if(currentSlide===5) typeFinalText();
+}
+
+// Slide 2 paragraph
+function showParagraph(){
+  document.getElementById('para').classList.remove('hidden');
+  document.getElementById('nextHeart2').classList.remove('hidden');
+}
+
+// Slide 3 visual
+function showVisual(){
+  document.getElementById('visualContainer').classList.remove('hidden');
+  document.getElementById('nextHeart3').classList.remove('hidden');
+}
+
+// Floating emojis
+function createFloatingEmojis(){
+  const emojis=['❤️','💖','✨','🌸','💌','🚂','📱','🌙'];
+  for(let i=0;i<25;i++){
+    const e=document.createElement('div');
+    e.className='emoji';
+    e.innerHTML=emojis[Math.floor(Math.random()*emojis.length)];
+    e.style.left=Math.random()*100+'vw';
+    e.style.top=Math.random()*100+'vh';
+    e.style.fontSize=(Math.random()*30+20)+'px';
+    document.body.appendChild(e);
+  }
+}
+createFloatingEmojis();
+
+// Corner decorations
+function addCornerDecor(){
+  const decor=['⭐','💖','🌟','✨','🌙','🚂','📱'];
+  const positions=['top:10px;left:10px;','top:10px;right:10px;','bottom:10px;left:10px;','bottom:10px;right:10px;'];
+  for(let i=0;i<4;i++){
+    const d=document.createElement('div');
+    d.className='cornerDecor';
+    d.innerHTML=decor[i];
+    d.style.cssText=positions[i];
+    document.body.appendChild(d);
+  }
+}
+addCornerDecor();
+
+// Slide 4 game
+function setupGame(){
+  const gameArea=document.getElementById('gameArea');
+  const totalEmojis=15;
+  let caught=0;
+  const emojis=['❤️','💖','✨','🌸','💌','🚂','📱','🌙'];
+  for(let i=0;i<totalEmojis;i++){
+    const f=document.createElement('div');
+    f.className='fallingEmoji';
+    f.innerHTML=emojis[Math.floor(Math.random()*emojis.length)];
+    f.style.top=Math.random()*50+'%';
+    f.style.left=Math.random()*80+'%';
+    f.style.fontSize=(Math.random()*40+20)+'px';
+    gameArea.appendChild(f);
+    f.onclick=function(){
+      f.style.display='none';
+      caught++;
+      if(caught===totalEmojis){
+        document.getElementById('finalHeart').style.display='block';
+      }
+    }
+  }
+}
+setupGame();
+
+// Slide 5 typewriter
+const finalText="I only belong to you, baby";
+const finalSubText="I love you till the moon and back ❤️💖✨";
+let i=0,j=0;
+function typeFinalText(){
+  if(i<finalText.length){
+    document.getElementById('finalText').innerHTML+=finalText.charAt(i);
+    i++;
+    setTimeout(typeFinalText,100);
+  }else{ typeFinalSubText(); }
+}
+function typeFinalSubText(){
+  if(j<finalSubText.length){
+    document.getElementById('finalSubText').innerHTML+=finalSubText.charAt(j);
+    j++;
+    setTimeout(typeFinalSubText,100);
+  }
+}
+
+// Extra hearts on clicking sparkHeart
+function spawnExtraHearts(){
+  const emojis=['❤️','💖','✨','🌸','💌'];
+  for(let i=0;i<10;i++){
+    const e=document.createElement('div');
+    e.className='emoji';
+    e.innerHTML=emojis[Math.floor(Math.random()*emojis.length)];
+    e.style.left=Math.random()*100+'vw';
+    e.style.top='90vh';
+    e.style.fontSize=(Math.random()*40+20)+'px';
+    document.body.appendChild(e);
+  }
+}
+</script>
+
+</body>
+</html>
